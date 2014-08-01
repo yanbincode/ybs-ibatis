@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL MAP Config2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<!-- ibatis2配置 -->
+<sqlMapConfig>
+	<!-- 引入数据源文件 -->
+	<properties resource="database.properties" />
+	<!-- 配置事物 -->
+	<transactionManager type="JDBC">
+		<!-- 配置数据源 -->
+		<dataSource type="SIMPLE">
+			<property name="JDBC.Driver" value="${database.driver}" />
+			<property name="JDBC.ConnectionURL" value="${database.url}" />
+			<property name="JDBC.Username" value="${database.username}" />
+			<property name="JDBC.Password" value="${database.password}" />
+		</dataSource>
+	</transactionManager>
+	<!-- 引入映射文件 -->
+	<sqlMap resource="ibatis/map/student_map.xml" />
+</sqlMapConfig>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+  <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+  			"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Student">
+
+	<!-- 定义别名，使用时就可省略包名 -->
+	<typeAlias alias="Student" type="pojo.Student" />
+
+	<!-- SQL字段与类属性映射关系，省略在SQL语句中用as转换字段别名 -->
+	<resultMap id="StudentResult" class="Student">
+		<result property="stuId" column="STU_ID" />
+		<result property="stuName" column="STU_NAME" />
+		<result property="stuGender" column="STU_GENDER" />
+		<result property="stuAge" column="STU_AGE" />
+	</resultMap>
+
+	<!-- SQL字段类型与类属性映射关系，在SQL语句中用?占位符就可以了 -->
+	<parameterMap id="StudentParameter" class="Student">
+		<parameter property="stuId" jdbcType="NUMBER" />
+		<parameter property="stuName" jdbcType="VARCHAR2" />
+		<parameter property="stuGender" jdbcType="VARCHAR2" />
+		<parameter property="stuAge" jdbcType="NUMBER" />
+	</parameterMap>
+
+	<select id="getAll" resultMap="StudentResult">
+		select * from student
+	</select>
+	<select id="getById" parameterClass="Long" resultMap="StudentResult">
+		select *
+		from student where id=#id#
+	</select>
+	
+</sqlMap>
