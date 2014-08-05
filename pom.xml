@@ -19,17 +19,16 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>org.apache.ibatis</groupId>
-				<artifactId>ibatis-sqlmap</artifactId>
+			<groupId>org.apache.ibatis</groupId>
+			<artifactId>ibatis-sqlmap</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>org.mybatis</groupId>
-				<artifactId>mybatis</artifactId>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
 		</dependency>
-		<!-- maven中心仓没这个jar包 
 		<dependency>
-			<groupId>extra-jar</groupId>
+			<groupId>oracle.jdbc.driver</groupId>
 			<artifactId>ojdbc14</artifactId>
-		</dependency>-->
+		</dependency>
 	</dependencies>
 </project>
