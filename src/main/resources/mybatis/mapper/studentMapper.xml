@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.dao.StudentDao">
+
+	<!-- 配置实体类，如果没有什么特殊的，也可以省略，由myBatis自行匹配 。 -->
+	<resultMap id="StudentResult" type="model.Student">
+		<id property="stuId" column="stu_id" jdbcType="NUMBER" />
+		<result property="stuName" column="STU_NAME" jdbcType="VARCHAR2" />
+		<result property="stuGender" column="STU_GENDER" jdbcType="VARCHAR2" />
+		<result property="stuAge" column="STU_AGE" jdbcType="NUMBER" />
+	</resultMap>
+
+	<!-- 半自动配置sql执行语句，resultMap对应上面的配置项 -->
+	<select id="selectById" parameterType="java.long.Long" resultMap="Student">
+		select * from student where
+		stu_id=#{id}
+	</select>
+
+	<!-- 如果没有配置resultMap ，可以用resultClass 指定实体类 -->
+	<select id="selectAll" resultClass="model.Student">
+		select * from student where stu_id=#{id}
+	</select>
+
+	<insert id="insert" parameterMap="StudentResult">
+		<!-- 先获取sequence -->
+		<selectKey resultClass="java.lang.Long" keyProperty="stuId">
+			select s_student.nextval from dual
+		</selectKey>
+		insert into student(stu_id,stu_name,stu_gender,stu_age)
+		value(#{stuId},#{stuName},#{stuGender},#{stuAge})
+	</insert>
+
+	<update id="update" parameterMap="StudentResult">
+		update student set
+		stu_name=#{stuName},stu_gender=#{stuGender},stu_age=#{stuAge}
+		where stu_id=#{stuId}
+	</update>
+
+	<delete id="deleteById" parameterType="java.long.Long">
+		delete student where stu_id=#{stuId}
+	</delete>
+
+</mapper>

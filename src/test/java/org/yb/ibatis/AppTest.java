@@ -1,38 +1,32 @@
 package org.yb.ibatis;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.io.IOException;
+import java.io.Reader;
+import java.sql.SQLException;
+import java.util.List;
+
+import model.Student;
+
+
+import com.ibatis.common.resources.Resources;
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+public class AppTest {
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) throws IOException, SQLException {
+		Reader reader = Resources.getResourceAsReader("ibatis/sql_map_config.xml");
+		SqlMapClient sqlMap = SqlMapClientBuilder.buildSqlMapClient(reader);
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+		List<Student> students = (List<Student>) sqlMap.queryForList("getAll", null);
+		for (Student student : students) {
+			System.out.print(student.getStuId() + "\t");
+			System.out.print(student.getStuName() + "\t");
+			System.out.print(student.getStuGender() + "\t");
+			System.out.println(student.getStuAge() + "\n");
+		}
+	}
 }
