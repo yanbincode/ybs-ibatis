@@ -3,7 +3,7 @@
 
 <mapper namespace="mybatis.dao.StudentDao">
 
-	<!-- 配置实体类，如果没有什么特殊的，也可以省略，由myBatis自行匹配 。 -->
+	<!-- 配置实体类，如果没有什么特殊的，也可以省略，由myBatis自行匹配 。 注：如果不声明这个type的话，查询不能用*，必须指明字段-->
 	<resultMap id="StudentResult" type="model.Student">
 		<id property="stuId" column="stu_id" jdbcType="NUMBER" />
 		<result property="stuName" column="STU_NAME" jdbcType="VARCHAR2" />
